@@ -1,11 +1,20 @@
 package database
 
+import (
+	"fmt"
+	"log"
+)
+
 func CreateProductTable() {
-	DB.Query(`CREATE TABLE IF NOT EXISTS products (
-		id SERIAL PRIMARY KEY
-		price integer
-		name text
+	_, err := DB.Exec(fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
+		id SERIAL PRIMARY KEY,
+		price integer,
+		name text,
 		description text,
 		category text NOT NULL 
-	)`)
+	)`, TableName))
+
+	if err != nil {
+		log.Fatal("Error creating the table: ", err)
+	}
 }
