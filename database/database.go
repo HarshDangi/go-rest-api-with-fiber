@@ -12,8 +12,13 @@ import (
 
 var DB *sql.DB
 
-func Connect() error {
+var TableName string = "products"
+
+func Connect(tableName string) error {
 	var err error
+	if tableName != "" {
+		TableName = tableName
+	}
 
 	p := config.Config("DB_PORT")
 
